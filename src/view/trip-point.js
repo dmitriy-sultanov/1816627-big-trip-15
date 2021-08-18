@@ -1,5 +1,6 @@
-import { startEventDay, timeStart, timeEnd } from '../util.js';
-export const createTripPointTemplate = (waypoint) => {
+import { startEventDay, timeStart, timeEnd, createElement } from '../util.js';
+
+const createTripPointTemplate = (waypoint) => {
   const favoriteButtonClasses = waypoint.isFavorite ? 'event__favorite-btn event__favorite-btn--active' : 'event__favorite-btn';
 
   const makeOffersTemplate = (offers) =>
@@ -44,3 +45,25 @@ export const createTripPointTemplate = (waypoint) => {
   </div>
 </li>`;
 };
+
+export default class TripPoint {
+  constructor(waypoint) {
+    this._waypoint = waypoint;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTripPointTemplate(this._waypoint);
+  }
+
+  getElement() {
+    if(!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

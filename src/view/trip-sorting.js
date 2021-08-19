@@ -24,7 +24,7 @@ const createTripSortingTemplate = () => (
   </div>
 </form>`);
 
-export default class Sorting {
+export default class TripSorting {
   constructor() {
     this._element = null;
   }

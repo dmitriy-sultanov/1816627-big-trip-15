@@ -1,4 +1,5 @@
-import { startEventDay, timeStart, timeEnd, createElement } from '../util.js';
+import { startEventDay, timeStart, timeEnd } from './utils.js/points.js';
+import AbstractView from './abstract.js';
 
 const createTripPointTemplate = (waypoint) => {
   const favoriteButtonClasses = waypoint.isFavorite ? 'event__favorite-btn event__favorite-btn--active' : 'event__favorite-btn';
@@ -46,24 +47,24 @@ const createTripPointTemplate = (waypoint) => {
 </li>`;
 };
 
-export default class TripPoint {
-  constructor(waypoint) {
+export default class TripPoint extends AbstractView {
+  constructor(waypoint){
+    super();
     this._waypoint = waypoint;
-    this._element = null;
+    this._editClickHandler = this._editClickHandler.bind(this);
   }
 
   getTemplate() {
     return createTripPointTemplate(this._waypoint);
   }
 
-  getElement() {
-    if(!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
+  _editClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.edit();
   }
 
-  removeElement() {
-    this._element = null;
+  setEditClickHandler(callback) {
+    this._callback.edit = callback;
+    this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this._editClickHandler);
   }
 }

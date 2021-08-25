@@ -3,7 +3,7 @@ import duration from 'dayjs/plugin/duration.js';
 import { getDestinations } from './destination.js';
 import { getMainOffer } from './offers.js';
 import { MAX_DAY_GAP, MAX_HOUR_GAP, MAX_MIN_GAP,  MSEC_IN_HOUR, MSEC_IN_DAY, POINT_TYPES, OFFER_TITLES, MAX_ID_NUMBER, PRICE_MIN, PRICE_MAX } from '../data.js';
-import { getRandomArrayElement, getRandomInteger } from '../util.js';
+import { getRandomArrayElement, getRandomInteger } from '../view/utils.js/common.js';
 
 dayjs.extend(duration);
 dayjs.duration(100);
@@ -69,5 +69,6 @@ const getPoint = () => {
     offer,
   };
 };
+
 
 export {getPoint};

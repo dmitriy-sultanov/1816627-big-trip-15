@@ -1,5 +1,5 @@
-import { getRandomInteger, getRandomLengthArray } from '../util.js';
 import { PRICE_MIN, PRICE_MAX } from '../data.js';
+import { getRandomInteger, getRandomLengthArray } from '../view/utils.js/common.js';
 
 
 const makeOffer = (title, id) => ({

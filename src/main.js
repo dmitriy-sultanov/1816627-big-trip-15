@@ -9,7 +9,6 @@ import NoEventView from './view/no-event.js';
 import { getPoint } from './mock/point.js';
 import { render, RenderPosition, replace } from './view/utils.js/render.js';
 
-
 const WAYPOINT_COUNT = 15;
 
 const waypoints = new Array(WAYPOINT_COUNT).fill().map(getPoint).sort((a, b) => a.dateFrom - b.dateFrom);

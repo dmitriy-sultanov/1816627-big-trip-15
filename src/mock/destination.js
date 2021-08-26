@@ -1,6 +1,6 @@
 import { CITIES, SENTENCES } from '../data.js';
-import {getPicturesArray, getRandomArrayElement} from '../util.js';
-
+import { getPicturesArray } from '../view/utils/points.js';
+import { getRandomArrayElement } from '../view/utils/common.js';
 const getDestinations = () => {
   const destArr = new Array;
   for(const city of CITIES) {

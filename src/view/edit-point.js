@@ -1,6 +1,7 @@
 import { CITIES, POINT_TYPES } from '../data.js';
 import { getPoint } from '../mock/point.js';
-import { eventStartTime, eventEndTime, createElement } from '../util.js';
+import { eventStartTime, eventEndTime } from './utils/points.js';
+import AbstractView from './abstract.js';
 
 const defaultCard = getPoint();
 
@@ -88,24 +89,37 @@ const createEditTripPointTemplate = (waypoint = defaultCard) => (`<li class="tri
   </form>
 </li>`);
 
-export default class EditTripPoint {
+export default class EditTripPoint extends AbstractView {
   constructor(waypoint = defaultCard) {
+    super();
     this._waypoint = waypoint;
-    this._element = null;
+    this._submitHandler = this._submitHandler.bind(this);
+    this._closeFormHandler = this._closeFormHandler.bind(this);
   }
 
   getTemplate() {
     return createEditTripPointTemplate(this._waypoint);
   }
 
-  getElement() {
-    if(!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
+  _submitHandler(evt) {
+    evt.preventDefault();
+    this._callback.submit();
   }
 
-  removeElement() {
-    this._element = null;
+  setSubmitHandler(callback) {
+    this._callback.submit = callback;
+    this.getElement().querySelector('form').addEventListener('submit', this._submitHandler);
+  }
+
+  _closeFormHandler(evt) {
+    evt.preventDefault();
+    this._callback.close();
+  }
+
+  setCloseFormHandler(callback) {
+    if(this.getElement().querySelector('.event__rollup-btn')) {
+      this._callback.close = callback;
+      this.getElement().querySelector('.event__rollup-btn').addEventListener('click', this._closeFormHandler);
+    }
   }
 }

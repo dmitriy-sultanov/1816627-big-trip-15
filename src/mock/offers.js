@@ -1,6 +1,5 @@
 import { PRICE_MIN, PRICE_MAX } from '../data.js';
-import { getRandomInteger, getRandomLengthArray } from '../view/utils.js/common.js';
-
+import { getRandomInteger, getRandomLengthArray } from '../view/utils/common.js';
 
 const makeOffer = (title, id) => ({
   id: id,
@@ -23,6 +22,5 @@ const makeOffers = (titles) => {
 };
 
 const getMainOffer = (type, titles) => ({type: type, offers: makeOffers(titles)});
-
 
 export {getMainOffer};

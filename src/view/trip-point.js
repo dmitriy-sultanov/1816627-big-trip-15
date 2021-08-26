@@ -1,4 +1,4 @@
-import { startEventDay, timeStart, timeEnd } from './utils.js/points.js';
+import { startEventDay, timeStart, timeEnd } from './utils/points.js';
 import AbstractView from './abstract.js';
 
 const createTripPointTemplate = (waypoint) => {

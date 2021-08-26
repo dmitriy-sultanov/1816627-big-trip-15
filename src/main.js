@@ -7,7 +7,7 @@ import TripPointView from './view/trip-point.js';
 import EventListView from './view/trip-events-list.js';
 import NoEventView from './view/no-event.js';
 import { getPoint } from './mock/point.js';
-import { render, RenderPosition, replace } from './view/utils.js/render.js';
+import { render, RenderPosition, replace } from './view/utils/render.js';
 
 const WAYPOINT_COUNT = 15;
 

@@ -3,7 +3,7 @@ import duration from 'dayjs/plugin/duration.js';
 import { getDestinations } from './destination.js';
 import { getMainOffer } from './offers.js';
 import { MAX_DAY_GAP, MAX_HOUR_GAP, MAX_MIN_GAP,  MSEC_IN_HOUR, MSEC_IN_DAY, POINT_TYPES, OFFER_TITLES, MAX_ID_NUMBER, PRICE_MIN, PRICE_MAX } from '../data.js';
-import { getRandomArrayElement, getRandomInteger } from '../view/utils.js/common.js';
+import { getRandomArrayElement, getRandomInteger } from '../view/utils/common.js';
 
 dayjs.extend(duration);
 dayjs.duration(100);
@@ -19,7 +19,6 @@ const getDateFrom = () => {
     .toDate();
 };
 
-
 const getDateTo = (date) => {
   const dayAdd = getRandomInteger(0, MAX_DAY_GAP);
   const hourAdd = getRandomInteger(0, MAX_HOUR_GAP);
@@ -29,7 +28,6 @@ const getDateTo = (date) => {
     .add(hourAdd, 'hour')
     .add(minuteAdd, 'minute');
 };
-
 
 const getDurationDate = (dateFrom, dateTo) => {
   const diffInMsec = dayjs(dateTo).diff(dayjs(dateFrom));
@@ -48,7 +46,6 @@ const getDurationDate = (dateFrom, dateTo) => {
 
   return `${diff.days}D ${diff.hours}H ${diff.minutes}M`;
 };
-
 
 const getPoint = () => {
   const dateFrom = getDateFrom();
@@ -69,6 +66,5 @@ const getPoint = () => {
     offer,
   };
 };
-
 
 export {getPoint};

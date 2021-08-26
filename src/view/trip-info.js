@@ -1,4 +1,4 @@
-import { getTotalCost, startEventDay, endEventDay, getRoute} from './utils.js/points.js';
+import { getTotalCost, startEventDay, endEventDay, getRoute} from './utils/points.js';
 import AbstractView from './abstract.js';
 
 const createTripInfoTemplate = (waypoints) => `<section class="trip-main__trip-info  trip-info">

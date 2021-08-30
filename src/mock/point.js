@@ -1,8 +1,9 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration.js';
+import { nanoid } from 'nanoid';
 import { getDestinations } from './destination.js';
 import { getMainOffer } from './offers.js';
-import { MAX_DAY_GAP, MAX_HOUR_GAP, MAX_MIN_GAP,  MSEC_IN_HOUR, MSEC_IN_DAY, POINT_TYPES, OFFER_TITLES, MAX_ID_NUMBER, PRICE_MIN, PRICE_MAX } from '../data.js';
+import { MAX_DAY_GAP, MAX_HOUR_GAP, MAX_MIN_GAP,  MSEC_IN_HOUR, MSEC_IN_DAY, POINT_TYPES, OFFER_TITLES, PRICE_MIN, PRICE_MAX } from '../data.js';
 import { getRandomArrayElement, getRandomInteger } from '../view/utils/common.js';
 
 dayjs.extend(duration);
@@ -57,7 +58,7 @@ const getPoint = () => {
   return {
     type: typePoint,
     basePrice: getRandomInteger(PRICE_MIN, PRICE_MAX),
-    id: getRandomInteger(1, MAX_ID_NUMBER),
+    id: nanoid(),
     dateFrom,
     dateTo,
     durationTime,

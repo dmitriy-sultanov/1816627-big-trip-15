@@ -1,6 +1,6 @@
 import { CITIES, POINT_TYPES } from '../data.js';
 import { getPoint } from '../mock/point.js';
-import { eventStartTime, eventEndTime } from './utils/points.js';
+import { eventStartTime, eventEndTime} from './utils/points.js';
 import AbstractView from './abstract.js';
 
 const defaultCard = getPoint();
@@ -103,7 +103,7 @@ export default class EditTripPoint extends AbstractView {
 
   _submitHandler(evt) {
     evt.preventDefault();
-    this._callback.submit();
+    this._callback.submit(this._waypoint);
   }
 
   setSubmitHandler(callback) {

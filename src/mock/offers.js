@@ -23,4 +23,5 @@ const makeOffers = (titles) => {
 
 const getMainOffer = (type, titles) => ({type: type, offers: makeOffers(titles)});
 
+
 export {getMainOffer};

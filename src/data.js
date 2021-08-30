@@ -11,15 +11,16 @@ const POINT_TYPES = [
 ];
 
 const CITIES = [
-  'Paris',
-  'Milan',
-  'Madrid',
-  'Rome',
-  'Tokyo',
-  'New York',
+  'London',
+  'Kiev',
   'Moscow',
-  'Prague',
-  'Sidney'];
+  'Rome',
+  'Paris',
+  'Minsk',
+  'Havana',
+  'New York',
+  'Chamonix',
+];
 
 const SENTENCES = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget.',
@@ -51,8 +52,6 @@ const MAX_MIN_GAP = 59;
 const MSEC_IN_HOUR = 3600000;
 const MSEC_IN_DAY = 86400000;
 
-const MAX_ID_NUMBER = 100;
-
 const MIN_CITIES_LENGTH = 3;
 
-export { POINT_TYPES, CITIES, SENTENCES, PRICE_MIN, PRICE_MAX, OFFER_TITLES, PICTURE_COUNT_MIN, PICTURE_COUNT_MAX, MAX_DAY_GAP, MAX_HOUR_GAP, MAX_MIN_GAP, MSEC_IN_HOUR, MSEC_IN_DAY, MAX_ID_NUMBER, MIN_CITIES_LENGTH };
+export { POINT_TYPES, CITIES, SENTENCES, PRICE_MIN, PRICE_MAX, OFFER_TITLES, PICTURE_COUNT_MIN, PICTURE_COUNT_MAX, MAX_DAY_GAP, MAX_HOUR_GAP, MAX_MIN_GAP, MSEC_IN_HOUR, MSEC_IN_DAY, MIN_CITIES_LENGTH };

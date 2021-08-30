@@ -34,7 +34,7 @@ const getRoute = (points) => {
   const lastCity = cities.slice([cities.length -1]);
 
   if(cities.length > MIN_CITIES_LENGTH) {
-    return `${cities.slice(0, 1).join(' &mdash; ')}&mdash; . . . &mdash; ${lastCity.join(' &mdash; ')}`;
+    return `${cities.slice(0, 1).join(' &mdash; ')} &mdash; . . . &mdash; ${lastCity.join(' &mdash; ')}`;
   }
   return cities.join(' &mdash; ');
 };

@@ -1,4 +1,4 @@
-import SortingView from '../view/sorting.js';
+import SortingView from '../view/trip-sorting.js';
 import EventListView from '../view/trip-events-list.js';
 import NoEventView from '../view/no-event.js';
 import PointPresenter from './point.js';

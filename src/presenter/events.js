@@ -1,4 +1,4 @@
-import SortingView from '../view/trip-sorting.js';
+import TripSortingView from '../view/trip-sorting.js';
 import EventListView from '../view/trip-events-list.js';
 import NoEventView from '../view/no-event.js';
 import PointPresenter from './point.js';
@@ -11,7 +11,7 @@ export default class Events {
     this._pointPresenter = new Map();
 
     this._eventsComponent = new EventListView();
-    this._sortComponent = new SortingView();
+    this._sortComponent = new TripSortingView();
     this._noEventComponent = new NoEventView();
 
     this._pointChangeHandler = this._pointChangeHandler.bind(this);

@@ -39,4 +39,14 @@ const getRoute = (points) => {
   return cities.join(' &mdash; ');
 };
 
-export {getPicturesArray, startEventDay, endEventDay, timeStart, timeEnd, eventStartTime, eventEndTime, getTotalCost, getRoute};
+const getDuration = (pointA, pointB) => dayjs(pointB).diff(dayjs(pointA));
+
+const sortByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
+
+const sortByTime = (firstPoint, secondPoint) => {
+  const firstTime = getDuration(firstPoint.dateFrom, firstPoint.dateTo);
+  const secondTime = getDuration(secondPoint.dateFrom, secondPoint.dateTo);
+  return secondTime - firstTime;
+};
+
+export {getPicturesArray, startEventDay, endEventDay, timeStart, timeEnd, eventStartTime, eventEndTime, getTotalCost, getRoute, sortByPrice, sortByTime};

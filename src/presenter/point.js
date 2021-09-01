@@ -59,7 +59,7 @@ export default class Point {
 
   destroy() {
     remove(this._pointComponent);
-    remove(this._pointComponent);
+    remove(this._pointEditComponent);
   }
 
   resetView() {

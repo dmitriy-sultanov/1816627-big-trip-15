@@ -1,26 +1,40 @@
-import { PRICE_MIN, PRICE_MAX } from '../data.js';
-import { getRandomInteger, getRandomLengthArray } from '../view/utils/common.js';
+import {getRandomArrayElement, getRandomInteger} from '../utils/common.js';
+import {EVENT_TYPES} from '../data.js';
 
-const makeOffer = (title, id) => ({
-  id: id,
-  title: title,
-  price: getRandomInteger(PRICE_MIN, PRICE_MAX),
-  checked: Boolean(getRandomInteger(0, 1)),
-});
+const MAX_COUNT_OFFERS = 5;
 
-const makeOffers = (titles) => {
+const generateOffersForType = (type, countOffers) => {
+  const titles = [
+    'Lorem ipsum',
+    'Cras aliquet',
+    'Nullam nunc ex',
+    'Aliquam id orci',
+    'Phasellus eros',
+    'Sed sed nisi',
+    'Sed blandit',
+  ];
 
-  const offersArr = new Array;
-  let countId = 0;
-  for(const title of titles) {
-    countId += 1;
-    const offer = makeOffer(title, countId);
-    offersArr.push(offer);
+  const offers = [];
+
+  for (let i = 0; i < countOffers; i++) {
+    offers.push({
+      title: `${i} ${type} ${getRandomArrayElement(titles)}`,
+      price: getRandomInteger(1, 20) * 10,
+    });
   }
-  const offers = getRandomLengthArray(offersArr);
+
   return offers;
 };
 
-const getMainOffer = (type, titles) => ({type: type, offers: makeOffers(titles)});
+const generateAllOffers = () => {
+  const offersForTypes = [];
+  for (const eventType of EVENT_TYPES) {
+    offersForTypes.push({
+      type: eventType,
+      offers: generateOffersForType(eventType, getRandomInteger(0, MAX_COUNT_OFFERS)),
+    });
+  }
+  return offersForTypes;
+};
 
-export {getMainOffer};
+export const allOffers = generateAllOffers();

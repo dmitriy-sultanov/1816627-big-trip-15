@@ -1,4 +1,4 @@
-import {RenderPosition} from '../date.js';
+import {RenderPosition} from '../data.js';
 import Abstract from '../view/abstract.js';
 
 export const render = (container, element, place) => {

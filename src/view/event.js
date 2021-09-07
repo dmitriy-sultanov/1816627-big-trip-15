@@ -1,6 +1,5 @@
 import AbstractView from './abstract.js';
-import { convertDateToISO, humanizeDateMonthDay, humanizeTime, calculateTimeDifference } from '../utils/dates.js';
-
+import { convertDateToISO, humanizeDateMonthDay, humanizeTime, calculateTimeDifference} from '../utils/events.js';
 
 const createSelectedOfferTemplate = (offer) => (
   `<li class="event__offer">

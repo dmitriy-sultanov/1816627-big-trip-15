@@ -2,6 +2,7 @@ import he from 'he';
 import SmartView from './smart.js';
 import {humanizeDateTime} from '../utils/events.js';
 import flatpickr from 'flatpickr';
+
 import '../../node_modules/flatpickr/dist/flatpickr.min.css';
 
 const createEventTypeInputTemplate = (type, isCurrentType) => {

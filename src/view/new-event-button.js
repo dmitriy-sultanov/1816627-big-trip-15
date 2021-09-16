@@ -23,4 +23,8 @@ export default class NewEventButton extends AbstractView {
     this._callback.menuClick = callback;
     this.getElement().addEventListener('click', this._menuClickHandler);
   }
+
+  setDisabledState(isDisabled) {
+    this.getElement().disabled = isDisabled;
+  }
 }

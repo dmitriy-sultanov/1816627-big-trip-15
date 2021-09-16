@@ -1,5 +1,12 @@
 import AbstractView from './abstract.js';
-import { convertDateToISO, humanizeDateMonthDay, humanizeTime, calculateTimeDifference} from '../utils/events.js';
+import {
+  convertDateToISO,
+  humanizeDateMonthDay,
+  humanizeTime,
+  calculateTimeSpend,
+  humanizeTimeSpend, calculateDuration
+} from '../utils/events.js';
+
 
 const createSelectedOfferTemplate = (offer) => (
   `<li class="event__offer">
@@ -19,11 +26,15 @@ const createSelectedOffersTemplate = (offers) => (
 const createEventTemplate = (event) => {
   const {type, destination, offers, timeStart, timeEnd, price, isFavorite} = event;
 
+  const destinationName = destination.name;
+
   const selectedOffers = (offers.length > 0) ? createSelectedOffersTemplate(offers) : '';
 
   const favoriteClassName = isFavorite
     ? 'event__favorite-btn event__favorite-btn--active'
     : 'event__favorite-btn';
+
+  const duration = humanizeTimeSpend(calculateTimeSpend(calculateDuration(event)));
 
   return `<li class="trip-events__item">
     <div class="event">
@@ -31,14 +42,14 @@ const createEventTemplate = (event) => {
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
       </div>
-      <h3 class="event__title">${type} ${destination}</h3>
+      <h3 class="event__title">${type} ${destinationName}</h3>
       <div class="event__schedule">
         <p class="event__time">
           <time class="event__start-time" datetime="${convertDateToISO(timeStart)}">${humanizeTime(timeStart)}</time>
           &mdash;
           <time class="event__end-time" datetime="${convertDateToISO(timeEnd)}">${humanizeTime(timeEnd)}</time>
         </p>
-        <p class="event__duration">${calculateTimeDifference(timeEnd, timeStart)}</p>
+        <p class="event__duration">${duration}</p>
       </div>
       <p class="event__price">
         &euro;&nbsp;<span class="event__price-value">${price}</span>

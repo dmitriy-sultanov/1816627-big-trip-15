@@ -32,4 +32,11 @@ export const UpdateType = {
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
   RESET: 'RESET',
+  INIT: 'INIT',
+};
+
+export const MenuItem = {
+  ADD_NEW_EVENT: 'ADD_NEW_EVENT',
+  TABLE: 'TABLE',
+  STATS: 'STATS',
 };

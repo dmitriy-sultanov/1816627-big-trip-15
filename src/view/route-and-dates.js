@@ -4,8 +4,8 @@ import {humanizeDateDayMonth, humanizeDateMonthDay} from '../utils/events.js';
 const MAX_CITIES_IN_ROUTE = 3;
 
 const createRouteTemplate = (destinations) => (destinations.length <= MAX_CITIES_IN_ROUTE)
-  ? destinations.join('&nbsp;&mdash;&nbsp;')
-  : `${destinations[0]}&nbsp;&mdash;&nbsp;&hellip;&nbsp;&mdash;&nbsp;${destinations[destinations.length - 1]}`;
+  ? destinations.map((destination) => destination.name).join('&nbsp;&mdash;&nbsp;')
+  : `${destinations[0].name}&nbsp;&mdash;&nbsp;&hellip;&nbsp;&mdash;&nbsp;${destinations[destinations.length - 1].name}`;
 
 
 const createDatesTemplate =  (events) => {

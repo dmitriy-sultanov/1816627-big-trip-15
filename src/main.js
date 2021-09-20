@@ -17,7 +17,7 @@ import {isOnline} from './utils/common.js';
 import {FilterType, MenuItem, RenderPosition, UpdateType} from './data.js';
 
 const END_POINT = 'https://15.ecmascript.pages.academy/big-trip';
-const AUTHORIZATION = 'Basic zu23z8olk07oawo';
+const AUTHORIZATION = 'Basic zu15z8olk99oawo';
 const STORE_PREFIX = 'big-trip-localstorage';
 const STORE_VER = 'v15';
 const StoreName = {

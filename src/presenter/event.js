@@ -122,14 +122,6 @@ export default class Event {
     this._mode = Mode.DEFAULT;
   }
 
-  _escKeydownHandler(evt) {
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
-      evt.preventDefault();
-      this._editFormComponent.reset(this._event);
-      this._replaceFormToEvent();
-    }
-  }
-
   _handleEditClick() {
     if (!isOnline()) {
       toast('You can\'t edit event offline');
@@ -161,6 +153,7 @@ export default class Event {
     const isMinorUpdate = !isPriceEqual || !isOffersPriceEqual || !isDestinationEqual || !isDateEndEqual;
 
     this._changeData(UserAction.UPDATE_EVENT, isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH, event, {isDateStartEqual, isDurationEqual, isPriceEqual});
+    this._replaceFormToEvent();
   }
 
   _handleDeleteClick(event) {
@@ -185,5 +178,13 @@ export default class Event {
         },
       ),
     );
+  }
+
+  _escKeydownHandler(evt) {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      evt.preventDefault();
+      this._editFormComponent.reset(this._event);
+      this._replaceFormToEvent();
+    }
   }
 }

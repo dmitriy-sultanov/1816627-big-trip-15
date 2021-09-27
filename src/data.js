@@ -1,41 +1,65 @@
-export const EVENT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
+export const BLANK_DESTINATION = {
+  name: '',
+  description: '',
+  pictures: [],
+};
+
+export const BLANK_POINT = {
+  basePrice: 0,
+  destination: {...BLANK_DESTINATION},
+  isFavorite: false,
+  offers: [],
+};
+
 export const FilterType = {
   EVERYTHING: 'everything',
-  PAST: 'past',
   FUTURE: 'future',
+  PAST: 'past',
 };
-export const NoEventMessage = {
-  EVERYTHING: 'Click New Event to create your first event',
-  PAST: 'There are no past events now',
-  FUTURE: 'There are no future events now',
+
+export const HumanDateFormatPattern = {
+  DEFAULT: 'DD/MM/YY HH:mm',
+  DEFAULT_FLATPICKR: 'd/m/y H:i',
+  ONLY_DAY: 'DD',
+  MONTH_DAY: 'MMM DD',
+  ONLY_TIME: 'HH:mm',
 };
+
 export const RenderPosition = {
-  AFTERBEGIN: 'afterbegin',
-  BEFOREEND: 'beforeend',
+  AFTER_BEGIN: 'afterbegin',
+  BEFORE_END: 'beforeend',
 };
 
 export const SortType = {
   DAY: 'day',
+  EVENT: 'event',
   TIME: 'time',
   PRICE: 'price',
+  OFFER: 'offer',
 };
 
-export const UserAction = {
-  UPDATE_EVENT: 'UPDATE_EVENT',
-  ADD_EVENT: 'ADD_EVENT',
-  DELETE_EVENT: 'DELETE_EVENT',
+export const State = {
+  ABORTING: 'ABORTING',
+  DELETING: 'DELETING',
+  SAVING: 'SAVING',
+};
+
+export const ToastMessage = {
+  ADD: 'You can\'t create new point offline',
+  DELETE: 'You can\'t delete point offline',
+  EDIT: 'You can\'t edit point offline',
+  SAVE: 'You can\'t save point offline',
 };
 
 export const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
-  RESET: 'RESET',
-  INIT: 'INIT',
+  INIT : 'INIT',
 };
 
-export const MenuItem = {
-  ADD_NEW_EVENT: 'ADD_NEW_EVENT',
-  TABLE: 'TABLE',
-  STATS: 'STATS',
+export const UserAction = {
+  ADD_POINT : 'ADD_POINT',
+  DELETE_POINT : 'DELETE_POINT',
+  UPDATE_POINT : 'UPDATE_POINT',
 };

@@ -1,91 +1,92 @@
-import EventsModel from '../model/events.js';
+import PointsModel from '../model/points.js';
+
+const ApiUrl = {
+  POINTS: 'points',
+  DESTINATIONS: 'destinations',
+  OFFERS: 'offers',
+};
 
 const Method = {
-  GET: 'GET',
-  PUT: 'PUT',
-  POST: 'POST',
   DELETE: 'DELETE',
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
 };
 
 export default class Api {
-  constructor(endPoint, authorization) {
-    this._endPoint = endPoint;
+  constructor(baseUrl, authorization) {
+    this._baseUrl = baseUrl;
     this._authorization = authorization;
   }
 
   getPoints() {
-    return this._load({url: 'points'})
+    return this._load({url: ApiUrl.POINTS})
       .then(Api.toJSON)
-      .then((points) => points.map(EventsModel.adaptToClient));
+      .then((response) => response.map(PointsModel.adaptToClient));
   }
 
-  updatePoint(event) {
+  addPoint(point) {
     return this._load({
-      url: `points/${event.id}`,
-      method: Method.PUT,
-      body: JSON.stringify(EventsModel.adaptToServer(event)),
-      headers: new Headers({'Content-Type': 'application/json'}),
-    })
-      .then(Api.toJSON)
-      .then(EventsModel.adaptToClient);
-  }
-
-  addPoint(event) {
-    return this._load({
-      url: 'points',
+      url: ApiUrl.POINTS,
       method: Method.POST,
-      body: JSON.stringify(EventsModel.adaptToServer(event)),
-      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify(PointsModel.adaptToServer(point)),
+      headers: Api.getJSONContentHeader(),
     })
       .then(Api.toJSON)
-      .then(EventsModel.adaptToClient);
+      .then(PointsModel.adaptToClient);
   }
 
-  deletePoint(event) {
+  updatePoint(point) {
     return this._load({
-      url: `points/${event.id}`,
+      url: `${ApiUrl.POINTS}/${point.id}`,
+      method: Method.PUT,
+      body: JSON.stringify(PointsModel.adaptToServer(point)),
+      headers: Api.getJSONContentHeader(),
+    })
+      .then(Api.toJSON)
+      .then(PointsModel.adaptToClient);
+  }
+
+  deletePoint(point) {
+    return this._load({
+      url: `${ApiUrl.POINTS}/${point.id}`,
       method: Method.DELETE,
     });
   }
 
-  getInitialData() {
-    return Promise.all([this._getDestinations(), this._getOffers()]);
+  getDestinations() {
+    return this._load({url: ApiUrl.DESTINATIONS}).then(Api.toJSON);
+  }
+
+  getOffers() {
+    return this._load({url: ApiUrl.OFFERS}).then(Api.toJSON);
   }
 
   sync(data) {
     return this._load({
-      url: 'points/sync',
+      url: `${ApiUrl.POINTS}/sync`,
       method: Method.POST,
       body: JSON.stringify(data),
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: Api.getJSONContentHeader(),
     })
       .then(Api.toJSON);
   }
 
-  _getDestinations() {
-    return this._load({url: 'destinations'})
-      .then(Api.toJSON);
-  }
-
-  _getOffers() {
-    return this._load({url: 'offers'})
-      .then(Api.toJSON);
-  }
-
-  _load({
-    url,
-    method = Method.GET,
-    body = null,
-    headers = new Headers(),
-  }) {
+  async _load(settings) {
+    const {url, method = Method.GET, body = null, headers = new Headers()} = settings;
     headers.append('Authorization', this._authorization);
 
-    return fetch(
-      `${this._endPoint}/${url}`,
-      {method, body, headers},
-    )
-      .then(Api.checkStatus)
-      .catch(Api.catchError);
+    try {
+      const response = await fetch(`${this._baseUrl}/${url}`, {method, body, headers});
+      Api.checkStatus(response);
+      return response;
+    } catch (err) {
+      Api.catchError(err);
+    }
+  }
+
+  static catchError(err) {
+    throw err;
   }
 
   static checkStatus(response) {
@@ -96,11 +97,11 @@ export default class Api {
     return response;
   }
 
-  static toJSON(response) {
-    return response.json();
+  static getJSONContentHeader() {
+    return new Headers({'Content-Type': 'application/json'});
   }
 
-  static catchError(err) {
-    throw err;
+  static toJSON(response) {
+    return response.json();
   }
 }

@@ -1,0 +1,53 @@
+import InfoView from '../view/info.js';
+import {RenderPosition, UpdateType} from '../data.js';
+import {getTripInfo} from '../utils/info.js';
+import {remove, render, replace} from '../utils/render.js';
+
+export default class Info {
+  constructor(container, pointsModel) {
+    this._container = container;
+    this._pointsModel = pointsModel;
+
+    this._infoComponent = null;
+
+    this._isLoading = true;
+
+    this._handleModelEvent = this._handleModelEvent.bind(this);
+    this._pointsModel.addObserver(this._handleModelEvent);
+  }
+
+  init() {
+    this._renderInfo();
+  }
+
+  _getDetails(points) {
+    return getTripInfo(points);
+  }
+
+  _handleModelEvent(updateType) {
+    if (updateType === UpdateType.INIT) {
+      this._isLoading = false;
+    }
+
+    this._renderInfo();
+  }
+
+  _renderInfo() {
+    const points = this._pointsModel.getPoints();
+
+    if (this._isLoading || !points.length) {
+      remove(this._infoComponent);
+      return this._infoComponent = null;
+    }
+
+    const prevInfoComponent = this._infoComponent;
+    this._infoComponent = new InfoView(this._getDetails(points));
+
+    if (prevInfoComponent === null) {
+      return render(this._container, this._infoComponent, RenderPosition.AFTER_BEGIN);
+    }
+
+    replace(this._infoComponent, prevInfoComponent);
+    remove(prevInfoComponent);
+  }
+}

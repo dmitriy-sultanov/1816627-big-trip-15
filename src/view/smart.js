@@ -3,41 +3,38 @@ import Abstract from './abstract.js';
 export default class Smart extends Abstract {
   constructor() {
     super();
-
-    this._data = {};
+    this._state = {};
   }
 
-  updateData(update, justDataUpdating) {
-    if(!update) {
+  updateState(stateUpdate, updateStateOnly) {
+    if (!stateUpdate) {
       return;
     }
 
-    this._data = Object.assign(
-      {},
-      this._data,
-      update,
-    );
+    const oldState = this._state;
+    this._state = {...oldState, ...stateUpdate};
 
-    if (justDataUpdating) {
+    if (updateStateOnly) {
       return;
     }
 
-    this.updateElement();
-  }
-
-  updateElement() {
-    const prevElement = this.getElement();
-    const parent = prevElement.parentElement;
-    this.removeElement();
-
-    const newElement = this.getElement();
-
-    parent.replaceChild(newElement, prevElement);
-
-    this.restoreHandlers();
+    this._updateElement();
   }
 
   restoreHandlers() {
-    throw new Error('Abstract method not implemented: restoreHandlers');
+    throw new Error(`Non-abstract class '${this.constructor.name}' does not implement inherited abstract member 'restoreHandlers' from class 'Smart'.`);
+  }
+
+  _updateElement() {
+    const oldElement = this.getElement();
+    const parent = oldElement.parentElement;
+
+    if (parent) {
+      this.removeElement();
+
+      const newElement = this.getElement();
+      parent.replaceChild(newElement, oldElement);
+      this.restoreHandlers();
+    }
   }
 }

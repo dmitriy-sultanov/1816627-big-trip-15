@@ -1,10 +1,14 @@
-export default class Offers {
+import AbstractObserver from '../utils/abstract-observer.js';
+
+export default class Offers extends AbstractObserver {
   constructor() {
+    super();
     this._offers = new Map();
   }
 
-  setOffers(offers) {
-    offers.forEach((offer) => this._offers.set(offer.type, offer));
+  setOffers(updateType, offers) {
+    offers.forEach((offer) => this._offers.set(offer.type, offer.offers));
+    this._notify(updateType, this._offers);
   }
 
   getOffers() {
